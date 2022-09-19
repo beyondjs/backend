@@ -1,0 +1,6 @@
+{
+  "name": "client",
+  "bundle": "ts",
+  "platforms": "*",
+  "files": "*"
+}

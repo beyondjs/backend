@@ -1,0 +1,38 @@
+{
+  "scope": "beyond-js",
+  "name": "backend",
+  "version": "0.0.10",
+  "license": "MIT",
+  "modules": {
+    "path": "./modules"
+  },
+  "deployment": {
+    "distributions": [
+      {
+        "name": "npm",
+        "npm": {
+          "platforms": {
+            "web": "web",
+            "backend": "backend"
+          }
+        }
+      },
+      {
+        "name": "web-tsc",
+        "platform": "web",
+        "port": 9995,
+        "ts": {
+          "compiler": "tsc"
+        }
+      },
+      {
+        "name": "backend-tsc",
+        "platform": "backend",
+        "port": 9996,
+        "ts": {
+          "compiler": "tsc"
+        }
+      }
+    ]
+  }
+}

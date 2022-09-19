@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@beyond-js/kernel": "0.0.22",
+    "socket.io": "^4.5.1"
+  }
+}
