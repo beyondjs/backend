@@ -25,7 +25,7 @@ export default class {
         // Check if the service is running. Start it if it is not
         pkg !== '@beyond-js/local' && await this.#initiator.check();
 
-        const {io} = await bimport('socket.io-client@4.5.1');
+        const {io} = await bimport('socket.io-client');
         let query = backend.io.querystring && await backend.io.querystring();
 
         const {host} = this.#backend;
