@@ -1,3 +1,5 @@
+import {PendingPromise} from '@beyond-js/kernel/core';
+
 declare const bimport: (resource: string, version?: number) => Promise<any>;
 
 interface ILocalBridges {
@@ -9,24 +11,36 @@ export type BridgeSpecs = Map<string, MethodsSpecs>;
 type BridgesSpecs = Map<string, BridgeSpecs>;
 
 class Bridges {
-    // The bridges specification in production environment (not requested to the BEE)
-    readonly #bridges: BridgesSpecs;
+    // The bridges' specification in production environment (not requested to the BEE)
+    #bridges: BridgesSpecs;
+    #promise: PendingPromise<void>;
 
-    constructor() {
-        if (typeof (<any>globalThis).__bridges === 'object') return;
+    async initialize() {
+        if (this.#promise) {
+            await this.#promise;
+            return;
+        }
+        this.#promise = new PendingPromise();
+        const done = () => this.#promise.resolve();
+
+        if (typeof (<any>globalThis).__bridges === 'object') return done();
 
         // In production environment get the actions from the actions.specs.json file
         const {specifier} = (<any>globalThis).__app_package;
-        const specs: any = bimport(`${specifier}/actions.specs.json`);
-        if (!specs) return;
+        const specs: any = await bimport(`${specifier}/actions.specs.json`);
+        if (!specs) return done();
 
         this.#bridges = new Map(specs);
         this.#bridges.forEach((specs, module) => {
             this.#bridges.set(module, new Map(specs));
         });
+
+        done();
     }
 
     async get(module: string): Promise<{ errors?: string[], classes?: BridgeSpecs }> {
+        await this.initialize();
+
         if (this.#bridges) {
             const classes: BridgeSpecs = this.#bridges.get(module);
             return Promise.resolve({classes});
