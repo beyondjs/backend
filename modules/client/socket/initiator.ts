@@ -49,11 +49,11 @@ export default class {
 
         const {pkg, local} = this.#backend;
         const id = `${pkg}/${local}`;
-        const service = this.#local.bees.get(id);
-        const status = await service.status;
+        const launcher = this.#local.launchers.get(id);
+        const status = await launcher.status;
         if (status === 'running') return;
 
-        await service.start();
+        await launcher.start();
         await new Promise(resolve => setTimeout(resolve, 2000));
     }
 }
