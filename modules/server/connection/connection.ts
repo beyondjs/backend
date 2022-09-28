@@ -101,6 +101,7 @@ export class Connection {
             const {specifier} = (<any>globalThis).__app_package;
             const {local} = await bimport(`${specifier}/config`);
             const error = local ? {message, stack} : {message};
+            console.log(stack);
             return respond({error});
         }
     }

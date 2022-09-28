@@ -8,7 +8,8 @@
   },
   "libraries": {
     "imports": [
-      "@beyond-js/kernel"
+      "@beyond-js/kernel",
+      "@beyond-js/local"
     ]
   },
   "deployment": {
