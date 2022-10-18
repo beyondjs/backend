@@ -3,7 +3,7 @@ import type {Backend} from '../backend';
 
 declare const bimport: (resource: string, version?: number) => Promise<any>;
 
-declare class LocalBEE extends Events {
+declare class Launcher extends Events {
     get status(): Promise<string>;
 
     start(): Promise<void>;
@@ -14,8 +14,8 @@ declare class LocalBEE extends Events {
 declare class BeyondLocal {
     on(event: string, listener: any, priority?: number): this;
 
-    get bees(): {
-        get(id: string): LocalBEE;
+    get launchers(): {
+        get(id: string): Launcher;
     };
 }
 
