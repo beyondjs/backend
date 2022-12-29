@@ -1,7 +1,7 @@
 {
   "scope": "beyond-js",
   "name": "backend",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "license": "MIT",
   "modules": {
     "path": "./modules"
