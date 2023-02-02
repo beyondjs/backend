@@ -1,10 +1,57 @@
 {
+  "scope": "beyond-js",
+  "name": "backend",
+  "version": "0.1.3",
+  "license": "MIT",
+  "modules": {
+    "path": "./modules"
+  },
+  "libraries": {
+    "imports": [
+      "@beyond-js/kernel",
+      "@beyond-js/local"
+    ]
+  },
+  "deployment": {
+    "distributions": [
+      {
+        "name": "npm",
+        "maps": "external",
+        "npm": {
+          "platforms": {
+            "web": "web",
+            "backend": "backend"
+          }
+        }
+      },
+      {
+        "name": "web",
+        "platform": "web",
+        "ports": {
+          "bundles": 9107
+        },
+        "ts": {
+          "compiler": "tsc"
+        }
+      },
+      {
+        "name": "backend",
+        "platform": "backend",
+        "ports": {
+          "bundles": 9108
+        },
+        "ts": {
+          "compiler": "tsc"
+        }
+      }
+    ]
+  },
   "dependencies": {
     "socket.io": "^4.5.4",
     "socket.io-client": "^4.5.4",
-    "@beyond-js/kernel": "^0.1.7"
+    "@beyond-js/kernel": "~0.1.8"
   },
   "devDependencies": {
-    "@beyond-js/local": "^0.1.2"
+    "@beyond-js/local": "~0.1.3"
   }
 }
