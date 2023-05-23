@@ -1,4 +1,5 @@
 import {BackendServer} from '@beyond-js/backend/server';
+import * as http from 'http';
 
 interface IBeeSpecs {
     id: string,
@@ -25,16 +26,23 @@ interface IBeeSpecs {
     }
 }
 
-export /*bundle*/ function listen(port: number): void {
+interface IBackendServerSpecs {
+    port?: number,
+    server?: http.Server
+}
+
+export /*bundle*/ function listen(port: number | http.Server): void {
     if (typeof (<any>globalThis).__bee === 'object') {
         const specs: IBeeSpecs = (<any>globalThis).__bee.specs;
-        port = specs.ports.http;
+        port = <number>specs.ports.http;
     }
 
     if (!port) {
-        console.log('Port must be specified');
+        console.log('Port or Server must be specified');
         return;
     }
 
-    new BackendServer(port);
+    const specs: IBackendServerSpecs = {};
+    typeof port === 'number' ? specs.port = port : specs.server = port;
+    new BackendServer(specs);
 }

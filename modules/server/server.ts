@@ -3,6 +3,10 @@ import {Server, ServerOptions, Socket} from 'socket.io';
 import {Connection} from './connection/connection';
 
 // import {instrument} from '@socket.io/admin-ui';
+interface IBackendServerSpecs {
+    port?: number,
+    server?: http.Server
+}
 
 export /* bundle */
 class BackendServer {
@@ -24,7 +28,7 @@ class BackendServer {
         socket.on('disconnect', disconnect);
     }
 
-    constructor(port: number) {
+    constructor(specs: IBackendServerSpecs) {
         const options: Partial<ServerOptions> = {
             serveClient: false,
             maxHttpBufferSize: 100000,
@@ -34,13 +38,13 @@ class BackendServer {
             }
         };
 
-        const server = http.createServer();
+        const server = specs.server ? specs.server : http.createServer();
         const io = this.#server = new Server(server, options);
 
         // instrument(io, {auth: false});
         io.on('connection', this.#onConnection);
 
-        server.listen(port);
+        specs.port && server.listen(specs.port);
 
         typeof process.send === 'function' && process.send({type: 'ready'});
     }
