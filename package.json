@@ -1,6 +1,6 @@
 {
 	"name": "@beyond-js/backend",
-	"version": "1.0.0",
+	"version": "0.1.7",
 	"description": "This package is a key component of BeyondJS and must be installed as a dependency to use Bridges in your project",
 	"license": "MIT",
 	"modules": {
