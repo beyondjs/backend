@@ -5,7 +5,7 @@ import type { IActionRequest } from './executor/action';
 
 declare const bimport: (resource: string, version?: number) => Promise<any>;
 
-const MaxActiveRequests = process.env.git ?? 60;
+const MaxActiveRequests = process.env.MAX_ACTIVE_REQUEST ?? 60;
 
 enum State {
 	Executing,
