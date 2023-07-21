@@ -18,7 +18,7 @@ You can set the next variables in your `.env` file.
 
 - `MAX_ACTIVE_REQUEST`: [default: 60] Sets the maximum number of concurrent WebSocket connections that the library can handle, preventing overload and ensuring resource allocation efficienc
 
-- `CACHE_EXPIRATION_TIME`: Allows setting the duration for caching response answers, improving performance by avoiding redundant computations within the specified timeframe.
+- `CACHE_EXPIRATION_TIME`: Allows you to set the duration of response caching, which improves performance by avoiding redundant calculations within the specified time frame. *Its value is represented in milliseconds*. By default it is set to 60000 (1 minute).
 
 
 ### Documentation:
