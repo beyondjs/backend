@@ -128,7 +128,7 @@ export default class extends Events {
 				this.#executed = true;
 				this.#executing = false;
 				clearTimeout(this.#timer);
-				socket.off();
+				//socket.off();
 				this.#promise.reject(new Error('Socket disconnected'));
 			};
 			socket.on(this.#channel, onresponse);
